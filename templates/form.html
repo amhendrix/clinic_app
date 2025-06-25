@@ -1,0 +1,47 @@
+<!-- tempates/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Intake Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
+        .container { max-width: 480px; margin: auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 8px #ddd; }
+        .error { color: #b22222; margin-bottom: 1rem; }
+        label { display: block; margin-top: 1rem; }
+        input { width: 100%; padding: 0.5rem; margin-top: 0.3rem; border: 1px solid #bbb; border-radius: 4px; }
+        button { margin-top: 1.5rem; padding: 0.6rem 2rem; border: none; background: #0a7cff; color: #fff; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Patient Intake Form</h2>
+        {% if errors %}
+            <div class="error">
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form action="{{ url_for('submit') }}" method="post" novalidate>
+            <label for="first_name">Patient First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ data.first_name|default('') }}" required>
+
+            <label for="last_name">Patient Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ data.last_name|default('') }}" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" value="{{ data.dob|default('') }}" required max="{{ '%Y-%m-%d'|format(now().year, now().month, now().day) }}">
+
+            <label for="therapist_name">Therapist Name:</label>
+            <input type="text" id="therapist_name" name="therapist_name" value="{{ data.therapist_name|default('') }}" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+

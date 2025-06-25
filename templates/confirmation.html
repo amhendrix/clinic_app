@@ -1,0 +1,32 @@
+<!-- templates/confirmatin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submission Confirmation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
+        .container { max-width: 480px; margin: auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 8px #ddd; }
+        .success { color: #228b22; margin-bottom: 1rem; font-size: 1.2em; }
+        dt { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success">Patient information submitted successfully!</div>
+        <dl>
+            <dt>First Name:</dt>
+            <dd>{{ data.first_name }}</dd>
+            <dt>Last Name:</dt>
+            <dd>{{ data.last_name }}</dd>
+            <dt>Date of Birth:</dt>
+            <dd>{{ data.dob }}</dd>
+            <dt>Therapist Name:</dt>
+            <dd>{{ data.therapist_name }}</dd>
+        </dl>
+        <a href="{{ url_for('index') }}">Add another patient</a>
+    </div>
+</body>
+</html>
+o
